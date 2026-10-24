@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
@@ -105,8 +106,11 @@ public final class ClientEvents {
         if (me != null && Vampires.get(me).bat()) e.setCanceled(true);
     }
 
-    /** A player in bat form is drawn as a bat. */
-    @SubscribeEvent
+    /**
+     * A player in bat form is drawn as a bat. Cancelled at HIGHEST so no other mod's listener sees this Pre: one that
+     * pushed the pose stack here would never get the Post to pop it (that crashed the game with skin/animation mods).
+     */
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void renderPlayer(RenderPlayerEvent.Pre e) {
         Player p = e.getEntity();
         if (!Vampires.get(p).bat()) return;
@@ -125,14 +129,20 @@ public final class ClientEvents {
         bat.setXRot(p.getXRot());
         bat.flyAnimationState.startIfStopped(bat.tickCount);
         e.getPoseStack().pushPose();
-        e.getPoseStack().translate(0, -0.3, 0);
-        Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(bat)
-                .render(bat, p.getYRot(), e.getPartialTick(), e.getPoseStack(), e.getMultiBufferSource(), e.getPackedLight());
-        e.getPoseStack().popPose();
+        try {
+            e.getPoseStack().translate(0, -0.3, 0);
+            Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(bat)
+                    .render(bat, p.getYRot(), e.getPartialTick(), e.getPoseStack(), e.getMultiBufferSource(), e.getPackedLight());
+        } finally {
+            e.getPoseStack().popPose();
+        }
     }
 
-    /** Tackled flat on its back. */
-    @SubscribeEvent
+    /**
+     * Tackled flat on its back. LOWEST, and only for a Pre nobody cancelled, so whenever this pushes, the Post that
+     * pops it is sure to follow.
+     */
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void renderLivingPre(RenderLivingEvent.Pre<?, ?> e) {
         if (!ClientPayloads.downed(e.getEntity())) return;
         var pose = e.getPoseStack();
