@@ -1,0 +1,86 @@
+{
+  "bite": {
+    "subtitle": "subtitles.nightvein.bite",
+    "sounds": [
+      "nightvein:bite"
+    ]
+  },
+  "heartbeat": {
+    "subtitle": "subtitles.nightvein.heartbeat",
+    "sounds": [
+      "nightvein:heartbeat"
+    ]
+  },
+  "turned": {
+    "subtitle": "subtitles.nightvein.turned",
+    "sounds": [
+      "nightvein:turned"
+    ]
+  },
+  "cure": {
+    "subtitle": "subtitles.nightvein.cure",
+    "sounds": [
+      "nightvein:cure"
+    ]
+  },
+  "dash": {
+    "subtitle": "subtitles.nightvein.dash",
+    "sounds": [
+      "nightvein:dash"
+    ]
+  },
+  "mist": {
+    "subtitle": "subtitles.nightvein.mist",
+    "sounds": [
+      "nightvein:mist"
+    ]
+  },
+  "hypnotize": {
+    "subtitle": "subtitles.nightvein.hypnotize",
+    "sounds": [
+      "nightvein:hypnotize"
+    ]
+  },
+  "bat": {
+    "subtitle": "subtitles.nightvein.bat",
+    "sounds": [
+      "nightvein:bat"
+    ]
+  },
+  "tackle": {
+    "subtitle": "subtitles.nightvein.tackle",
+    "sounds": [
+      "nightvein:tackle"
+    ]
+  },
+  "bloodrush": {
+    "subtitle": "subtitles.nightvein.bloodrush",
+    "sounds": [
+      "nightvein:bloodrush"
+    ]
+  },
+  "crash": {
+    "subtitle": "subtitles.nightvein.crash",
+    "sounds": [
+      "nightvein:crash"
+    ]
+  },
+  "nightwalker_ambient": {
+    "subtitle": "subtitles.nightvein.nightwalker_ambient",
+    "sounds": [
+      "nightvein:nightwalker_ambient"
+    ]
+  },
+  "nightwalker_hurt": {
+    "subtitle": "subtitles.nightvein.nightwalker_hurt",
+    "sounds": [
+      "nightvein:nightwalker_hurt"
+    ]
+  },
+  "nightwalker_death": {
+    "subtitle": "subtitles.nightvein.nightwalker_death",
+    "sounds": [
+      "nightvein:nightwalker_death"
+    ]
+  }
+}
